@@ -17,6 +17,7 @@ class Reader{
         return fileName;
     }
     public static void main(String args[]){
-    
+    //Get the file name
+    String fileName = getFileName();
     }
 }
