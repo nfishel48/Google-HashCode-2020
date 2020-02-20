@@ -2,13 +2,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Library {
-	private int numBooks, processTime, shipRate;
+	private int id, numBooks, processTime, shipRate;
 	
 	public static int[] bookScores;
 	
 	private ArrayList<Integer> books;
 	
-	public Library(int numBooks, int processTime, int shipRate) {
+	public Library(int id, int numBooks, int processTime, int shipRate) {
+		this.id = id;
 		this.numBooks = numBooks;
 		this.processTime = processTime;
 		this.shipRate = shipRate;
@@ -27,6 +28,9 @@ public class Library {
 		return "# Books: " + numBooks + " // Processing Time: " + processTime + " // Ship Rate: " + shipRate + "\n\tBooks: " + books.toString();
 	}
 	
+	public int getId() {
+		return this.id;
+	}
 	public int getNumBooks() {
 		return this.numBooks;
 	}

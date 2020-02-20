@@ -46,18 +46,21 @@ public class Reader{
 			
 			libraries = new ArrayList<>();
 			
+			int index = 0;
 			String line;
 			
 			while ((line = file.readLine()) != null) {
 				String temp[] = line.split(" ");
 				
-				Library lib = new Library(Integer.parseInt(temp[0]), Integer.parseInt(temp[1]), Integer.parseInt(temp[2]));
+				Library lib = new Library(index, Integer.parseInt(temp[0]), Integer.parseInt(temp[1]), Integer.parseInt(temp[2]));
 				
 				if (lib.getProcessTime() < numDays) { // Only add the library if the processing time is before the deadline
 					lib.setBooks(file.readLine().split(" "));
 					
 					libraries.add(lib);
 				}
+				
+				index++;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -68,7 +71,7 @@ public class Reader{
     	System.out.println("Book Scores: " + Arrays.toString(bookScores) + "\n");
     	
     	for (int i = 0; i < libraries.size(); i++) {
-    		System.out.println("Library " + i + " // " + libraries.get(i));
+    		System.out.println("Library " + libraries.get(i).getId() + " // " + libraries.get(i));
     	}
     }
     
