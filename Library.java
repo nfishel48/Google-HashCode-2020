@@ -7,7 +7,7 @@ public class Library {
 	
 	public static int[] bookScores;
 	
-	private ArrayList<Integer> books;
+	private ArrayList<Integer> books, usedBooks;
 	
 	public Library(int id, int numBooks, int processTime, int shipRate) {
 		this.id = id;
@@ -15,6 +15,7 @@ public class Library {
 		this.processTime = processTime;
 		this.shipRate = shipRate;
 		this.totalScore = 0;
+		this.usedBooks = new ArrayList<>();
 	}
 	
 	public void setBooks(String[] strs) {
@@ -30,6 +31,22 @@ public class Library {
 	}
 	public void passDay() {
 		this.processTime--;
+	}
+	public void useBook(int index) {
+		usedBooks.add(index);
+	}
+	
+	public int getNextBook() {
+		for (int i = 0; i < books.size(); i++) {
+			if (Library.bookScores[books.get(i)] > -1)
+				return books.get(i);
+			
+			books.remove(i);
+			
+			i--;
+		}
+		
+		return -1;
 	}
 	
 	@Override
@@ -55,6 +72,9 @@ public class Library {
 	
 	public ArrayList<Integer> getBooks() {
 		return this.books;
+	}
+	public ArrayList<Integer> getUsedBooks() {
+		return this.usedBooks;
 	}
 }
 
