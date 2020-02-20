@@ -85,6 +85,10 @@ public class Reader{
     	return this.numDays;
     }
     
+    public int[] getBookScores() {
+    	return this.bookScores;
+    }
+    
     public String[] getSpecs() {
     	return this.specs;
     }

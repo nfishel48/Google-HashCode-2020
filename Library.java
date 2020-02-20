@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class Library {
 	private int id, totalScore, numBooks, processTime, shipRate;
@@ -24,6 +25,11 @@ public class Library {
 			
 			totalScore += bookScores[books.get(i)];
 		}
+		
+		books.sort(new BookComparator());
+	}
+	public void passDay() {
+		this.processTime--;
 	}
 	
 	@Override
@@ -49,5 +55,12 @@ public class Library {
 	
 	public ArrayList<Integer> getBooks() {
 		return this.books;
+	}
+}
+
+class BookComparator implements Comparator<Integer> {
+	@Override
+	public int compare(Integer o1, Integer o2) {
+		return Library.bookScores[o2] - Library.bookScores[o1];
 	}
 }
