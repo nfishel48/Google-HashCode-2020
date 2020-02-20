@@ -7,9 +7,13 @@ import java.io.*;
 import java.util.*;
 
 public class Reader{
+	private int numBooks, numLibraries, numDays;
+	
+	private int[] bookScores;
+	
 	private String[] specs;
 	
-	private ArrayList<String[]> rawData;
+	private ArrayList<Library> libraries;
 	
 	private BufferedReader file;
     
@@ -19,7 +23,7 @@ public class Reader{
     	input = new Scanner(System.in);
     }
     
-    public void readData() {
+    public void readData() {    	
     	System.out.print("Please enter a file name: ");
     	
     	try {
@@ -27,21 +31,62 @@ public class Reader{
 			
 			specs = file.readLine().split(" ");
 			
+			String[] strScores = file.readLine().split(" ");
+			
+			bookScores = new int[strScores.length];
+			Library.bookScores = bookScores;
+			
+			for (int i = 0; i < strScores.length; i++) {
+				bookScores[i] = Integer.parseInt(strScores[i]);
+			}
+			
+			numBooks = Integer.parseInt(specs[0]);
+			numLibraries = Integer.parseInt(specs[1]);
+			numDays = Integer.parseInt(specs[2]);
+			
+			libraries = new ArrayList<>();
+			
 			String line;
 			
 			while ((line = file.readLine()) != null) {
-				rawData.add(line.split(" "));
+				String temp[] = line.split(" ");
+				
+				Library lib = new Library(Integer.parseInt(temp[0]), Integer.parseInt(temp[1]), Integer.parseInt(temp[2]));
+				
+				if (lib.getProcessTime() < numDays) { // Only add the library if the processing time is before the deadline
+					lib.setBooks(file.readLine().split(" "));
+					
+					libraries.add(lib);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+    }
+    public void printLibraries() {
+    	System.out.println("# Days: " + numDays + " / # Libraries: " + numLibraries);
+    	System.out.println("Book Scores: " + Arrays.toString(bookScores) + "\n");
+    	
+    	for (int i = 0; i < libraries.size(); i++) {
+    		System.out.println("Library " + i + " // " + libraries.get(i));
+    	}
+    }
+    
+    public int getNumBooks() {
+    	return this.numBooks;
+    }
+    public int getNumLibraries() {
+    	return this.numLibraries;
+    }
+    public int getNumDays() {
+    	return this.numDays;
     }
     
     public String[] getSpecs() {
     	return this.specs;
     }
     
-    public ArrayList<String[]> getRawData(){
-    	return this.rawData;
+    public ArrayList<Library> getLibraries(){
+    	return this.libraries;
     }
 }
