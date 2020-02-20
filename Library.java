@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Library {
-	private int id, numBooks, processTime, shipRate;
+	private int id, totalScore, numBooks, processTime, shipRate;
 	
 	public static int[] bookScores;
 	
@@ -13,13 +13,16 @@ public class Library {
 		this.numBooks = numBooks;
 		this.processTime = processTime;
 		this.shipRate = shipRate;
+		this.totalScore = 0;
 	}
 	
 	public void setBooks(String[] strs) {
 		books = new ArrayList<>();
 		
-		for (int i = 0; i < strs.length - 1; i++) {
-			books.add(bookScores[Integer.parseInt(strs[i])]);
+		for (int i = 0; i < strs.length; i++) {
+			books.add(Integer.parseInt(strs[i]));
+			
+			totalScore += bookScores[books.get(i)];
 		}
 	}
 	
@@ -39,6 +42,9 @@ public class Library {
 	}
 	public int getShipRate() {
 		return this.shipRate;
+	}
+	public int getTotalScore() {
+		return this.totalScore;
 	}
 	
 	public ArrayList<Integer> getBooks() {
