@@ -9,6 +9,8 @@ import java.util.*;
 public class Reader{
 	private int numBooks, numLibraries, numDays;
 	
+	String fileName;
+	
 	private int[] bookScores;
 	
 	private String[] specs;
@@ -23,11 +25,9 @@ public class Reader{
     	input = new Scanner(System.in);
     }
     
-    public void readData() {    	
-    	System.out.print("Please enter a file name: ");
-    	
+    public void readData(char letter) {
     	try {
-			file = new BufferedReader(new FileReader(input.nextLine()));
+			file = new BufferedReader(new FileReader(letter + ".txt"));
 			
 			specs = file.readLine().split(" ");
 			
@@ -83,6 +83,10 @@ public class Reader{
     }
     public int getNumDays() {
     	return this.numDays;
+    }
+    
+    public String getFileName() {
+    	return this.fileName;
     }
     
     public int[] getBookScores() {

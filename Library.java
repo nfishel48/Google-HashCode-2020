@@ -33,6 +33,7 @@ public class Library {
 		this.processTime--;
 	}
 	public void useBook(int index) {
+		Library.bookScores[index] = -1;
 		usedBooks.add(index);
 	}
 	
@@ -47,6 +48,10 @@ public class Library {
 		}
 		
 		return -1;
+	}
+	
+	public double getValue() {
+		return (totalScore * processTime) / ((double) numBooks / shipRate);
 	}
 	
 	@Override
@@ -81,6 +86,11 @@ public class Library {
 class BookComparator implements Comparator<Integer> {
 	@Override
 	public int compare(Integer o1, Integer o2) {
-		return Library.bookScores[o2] - Library.bookScores[o1];
+		if (Library.bookScores[o2] - Library.bookScores[o1] > 0)
+			return -1;
+		if (Library.bookScores[o2] - Library.bookScores[o1] < 0)
+			return 1;
+			
+		return 0;
 	}
 }
